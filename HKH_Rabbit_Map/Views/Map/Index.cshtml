@@ -21,6 +21,7 @@
     <script type="text/javascript" src="http://api.go2map.com/maps/js/api_v2.5.1.js"></script>
     <script type="text/javascript">
         var map;
+        var interval = null;
         function initialize() {
             var myLatLng = new sogou.maps.LatLng(29.4388, 103.8983);
             var myOptions = {
@@ -331,222 +332,61 @@
             var image = "../../Assets/Images/123.png";
 
             //如果只指定一个，则自动认为悬停的图标跟前景显示的图标用同一个。
-            var marker = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.473, 103.972),
-                map: map,
-                icon: image,
-                title: "2#阀室"
-            });
-            attachSecretMessage(marker, "2");
-            var marker2 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4692, 103.9671),
-                map: map,
-                icon: image,
-                title: "3#阀室"
-            });
-            attachSecretMessage(marker2, "3");
-            var marker3 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4466, 103.9277),
-                map: map,
-                icon: image,
-                title: "4#阀室"
-            });
-            attachSecretMessage(marker3, "4");
-            var marker4 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4377, 103.8845),
-                map: map,
-                icon: image,
-                title: "5#阀室"
-            });
-            attachSecretMessage(marker4, "5");
-            var marker5 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4313, 103.8671),
-                map: map,
-                icon: image,
-                title: "6#阀室"
-            });
-            attachSecretMessage(marker5, "6");
-            var marker6 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4264, 103.8591),
-                map: map,
-                icon: image,
-                title: "7#阀室"
-            });
-            attachSecretMessage(marker6, "7");
-            var marker7 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4181, 103.8537),
-                map: map,
-                icon: image,
-                title: "8#阀室"
-            });
-            attachSecretMessage(marker7, "8");
-            var marker8 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4058, 103.83),
-                map: map,
-                icon: image,
-                title: "9#阀室"
-            });
-            attachSecretMessage(marker8, "9");
-            var marker9 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.3892, 103.8201),
-                map: map,
-                icon: image,
-                title: "10#阀室"
-            });
-            attachSecretMessage(marker9, "10");
-            var marker10 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4953, 104.0083),
-                map: map,
-                icon: '../../Assets/Images//0.png',
-                title:"输卤车间"
-            });
-            attachSecretMessage(marker10, "输卤车间");
-            var marker11 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4912, 104.00029),
-                map: map,
-                icon: '../../Assets/Images//1.png'
-            });
+            var latlngList = new Array();
+            latlngList.push(new sogou.maps.LatLng(29.473, 103.972));
+            latlngList.push(new sogou.maps.LatLng(29.4692, 103.9671));
+            latlngList.push(new sogou.maps.LatLng(29.4466, 103.9277));
+            latlngList.push(new sogou.maps.LatLng(29.4377, 103.8845));
+            latlngList.push(new sogou.maps.LatLng(29.4313, 103.8671));
+            latlngList.push(new sogou.maps.LatLng(29.4264, 103.8591));
+            latlngList.push(new sogou.maps.LatLng(29.4181, 103.8537));
+            latlngList.push(new sogou.maps.LatLng(29.4058, 103.83));
+            latlngList.push(new sogou.maps.LatLng(29.3892, 103.8201));
 
-            var marker12 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4849, 103.9939),
-                map: map,
-                icon: '../../Assets/Images//2.png'
-            });
+            for (var i = 0; i < latlngList.length; i++) {
+                var marker = createMaker(map, latlngList[i], image, i + 2 + '#阀室');
+                attachSecretMessage(marker, i + 2);
+            }
 
-            var marker13 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4820, 103.9854),
-                map: map,
-                icon: '../../Assets/Images/3.png'
-            });
+            var marker = createMaker(map, new sogou.maps.LatLng(29.4953, 104.0083), '../../Assets/Images//0.png', '输卤车间');
+            attachSecretMessage(marker, "输卤车间");
 
-            var marker14 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4785, 103.9770),
-                map: map,
-                icon: '../../Assets/Images/4.png'
-            });
+            var marker = createMaker(map, new sogou.maps.LatLng(29.3800, 103.8162), '../../Assets/Images/28.png', '五通厂区')
+            attachSecretMessage(marker, "五通厂区");
 
-            var marker15 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4726, 103.9702),
-                map: map,
-                icon: '../../Assets/Images/5.png'
-            });
-            var marker16 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4663, 103.9635),
-                map: map,
-                icon: '../../Assets/Images/6.png'
-            });
-            var marker17 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4648, 103.9533),
-                map: map,
-                icon: '../../Assets/Images/7.png'
-            });
-            var marker18 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4582, 103.9463),
-                map: map,
-                icon: '../../Assets/Images/8.png'
-            });
-            var marker19 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4544, 103.9384),
-                map: map,
-                icon: '../../Assets/Images/9.png'
-            });
-            var marker20 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.44859, 103.9318),
-                map: map,
-                icon: '../../Assets/Images/10.png'
-            });
-            var marker21 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4447, 103.9230),
-                map: map,
-                icon: '../../Assets/Images/11.png'
-            });
-            var marker22 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4389, 103.9162),
-                map: map,
-                icon: '../../Assets/Images/12.png'
-            });
-            var marker23 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4392, 103.9073),
-                map: map,
-                icon: '../../Assets/Images/13.png'
-            });
-            var marker24 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4403, 103.8981),
-                map: map,
-                icon: '../../Assets/Images/14.png'
-            });
-            var marker25 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4369, 103.8886),
-                map: map,
-                icon: '../../Assets/Images/15.png'
-            });
-            var marker26 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.43930, 103.8791),
-                map: map,
-                icon: '../../Assets/Images/16.png'
-            });
-            var marker27 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4334, 103.8717),
-                map: map,
-                icon: '../../Assets/Images/17.png'
-            });
-            var marker28 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4285, 103.8635),
-                map: map,
-                icon: '../../Assets/Images/18.png',
-            });
-            var marker29 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4238, 103.857),
-                map: map,
-                icon: '../../Assets/Images/19.png'
-            });
-            var marker30 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4161, 103.8536),
-                map: map,
-                icon: '../../Assets/Images/20.png'
-            });
-            var marker31 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4094, 103.8489),
-                map: map,
-                icon: '../../Assets/Images/21.png'
-            });
-            var marker32 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4075, 103.8396),
-                map: map,
-                icon: '../../Assets/Images/22.png'
-            });
-            var marker33 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4075, 103.8314),
-                map: map,
-                icon: '../../Assets/Images/23.png'
-            });
-            var marker34 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.4008, 103.8313),
-                map: map,
-                icon: '../../Assets/Images/24.png'
-            });
-            var marker35 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.3933, 103.8331),
-                map: map,
-                icon: '../../Assets/Images/25.png'
-            });
-            var marker36 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.3879, 103.8255),
-                map: map,
-                icon: '../../Assets/Images/26.png'
-            });
-            var marker37 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.3863, 103.8184),
-                map: map,
-                icon: '../../Assets/Images/27.png'
-            });
-            var marker38 = new sogou.maps.Marker({
-                position: new sogou.maps.LatLng(29.3800, 103.8162),
-                map: map,
-                icon: '../../Assets/Images/28.png',
-                title:"五通厂区"
-            });
-            attachSecretMessage(marker38, "五通厂区");
+            var latlngKmList = new Array();
+            latlngKmList.push(new sogou.maps.LatLng(29.4912, 104.00029));
+            latlngKmList.push(new sogou.maps.LatLng(29.4849, 103.9939));
+            latlngKmList.push(new sogou.maps.LatLng(29.4820, 103.9854));
+            latlngKmList.push(new sogou.maps.LatLng(29.4785, 103.9770));
+            latlngKmList.push(new sogou.maps.LatLng(29.4726, 103.9702));
+            latlngKmList.push(new sogou.maps.LatLng(29.4663, 103.9635));
+            latlngKmList.push(new sogou.maps.LatLng(29.4648, 103.9533));
+            latlngKmList.push(new sogou.maps.LatLng(29.4582, 103.9463));
+            latlngKmList.push(new sogou.maps.LatLng(29.4544, 103.9384));
+            latlngKmList.push(new sogou.maps.LatLng(29.44859, 103.9318));
+            latlngKmList.push(new sogou.maps.LatLng(29.4447, 103.9230));
+            latlngKmList.push(new sogou.maps.LatLng(29.4389, 103.9162));
+            latlngKmList.push(new sogou.maps.LatLng(29.4392, 103.9073));
+            latlngKmList.push(new sogou.maps.LatLng(29.4403, 103.8981));
+            latlngKmList.push(new sogou.maps.LatLng(29.4369, 103.8886));
+            latlngKmList.push(new sogou.maps.LatLng(29.43930, 103.8791));
+            latlngKmList.push(new sogou.maps.LatLng(29.4334, 103.8717));
+            latlngKmList.push(new sogou.maps.LatLng(29.4285, 103.8635));
+            latlngKmList.push(new sogou.maps.LatLng(29.4238, 103.857));
+            latlngKmList.push(new sogou.maps.LatLng(29.4161, 103.8536));
+            latlngKmList.push(new sogou.maps.LatLng(29.4094, 103.8489));
+            latlngKmList.push(new sogou.maps.LatLng(29.4075, 103.8396));
+            latlngKmList.push(new sogou.maps.LatLng(29.4075, 103.8314));
+            latlngKmList.push(new sogou.maps.LatLng(29.4008, 103.8313));
+            latlngKmList.push(new sogou.maps.LatLng(29.3933, 103.8331));
+            latlngKmList.push(new sogou.maps.LatLng(29.3879, 103.8255));
+            latlngKmList.push(new sogou.maps.LatLng(29.3863, 103.8184));
+
+            for (var i = 0; i < latlngKmList.length; i++) {
+                createMaker(map, latlngKmList[i], '../../Assets/Images/' + i + '.png');
+            }
+
             flightPath.setMap(map);
         }
 
@@ -558,23 +398,44 @@
                 });
             sogou.maps.event.addListener(marker, 'click', function () {
                 var message = "<table style='width:150px'><tr><td style='width:50px'>压力:</td><td>";
-                message += "<span id='pressspan' class='pressspan' style='width:100px'></span>Mpa</td></tr></table>";
-                var interval = setInterval(function () {
+                message += "<span id='pressspan' class='pressspan' style='width:100px'></span>Mpa</td></tr>";
+                if (loggerName === "输卤车间" || loggerName === "五通厂区") {
+                    message += "<tr class='flowrow'><td>流量</td><td><span id='flowspan' class='flowspan'></span>m³/h</td></tr>"
+                }
+                message += "</table>";
+
+                if (interval != null) {
+                    window.clearInterval(interval);
+                }
+
+                interval = setInterval(function () {
                     $.getJSON('/Map/GetData?' + Math.random(), { data: loggerName }, function (data) {
-                        if (loggername === "输卤车间") {
-                            $('.pressspan').html(data[0]);
+                        if (data.loggerName === "输卤车间") {
+                            $('.pressspan').html(data.Data[0]);
+                            $('.flowspan').html((parseFloat(data.Data[1]) + parseFloat(data.Data[2])).toString());
                         }
-                        else if (loggerName === "五通厂区") {
-                            $('.pressspan').html(data[0]);
+                        else if (data.loggerName === "五通厂区") {
+                            $('.pressspan').html(data.Data[0]);
+                            $('.flowspan').html(data.Data[1]);
                         }
                         else {
-                            $('.pressspan').html(data[0]);
+                            $('.pressspan').html(data.Data);
                         }
                     });
                 }, 1000);
                 infowindow.setContent(message);
                 infowindow.open(map, marker);
             });
+        }
+
+        function createMaker(map, position, icon, title = '') {
+            var marker = new sogou.maps.Marker({
+                position: position,
+                map: map,
+                icon: icon,
+                title: title
+            });
+            return marker;
         }
     </script>
 </head>
