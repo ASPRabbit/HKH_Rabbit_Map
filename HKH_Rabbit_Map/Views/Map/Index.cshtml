@@ -1,0 +1,584 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>在线地图</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map_canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://api.go2map.com/maps/js/api_v2.5.1.js"></script>
+    <script type="text/javascript">
+        var map;
+        function initialize() {
+            var myLatLng = new sogou.maps.LatLng(29.4388, 103.8983);
+            var myOptions = {
+                zoom: 13,
+                center: myLatLng,
+                mapTypeId: sogou.maps.MapTypeId.ROADMAP
+            };
+
+            map = new sogou.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+            //坐标可以是经纬度坐标，也可以是搜狗坐标
+            var flightPlanCoordinates = [
+                new sogou.maps.LatLng(29.3800, 103.8162),
+                new sogou.maps.LatLng(29.3848, 103.8168),
+                new sogou.maps.LatLng(29.3848, 103.8173),
+                new sogou.maps.LatLng(29.3857, 103.8176),
+                new sogou.maps.LatLng(29.3860, 103.8180),
+                new sogou.maps.LatLng(29.3864, 103.8184),
+                new sogou.maps.LatLng(29.3868, 103.8188),
+                new sogou.maps.LatLng(29.3878, 103.8199),
+                new sogou.maps.LatLng(29.3892, 103.8201),
+                new sogou.maps.LatLng(29.3896, 103.8202),
+                new sogou.maps.LatLng(29.3898, 103.8203),
+                new sogou.maps.LatLng(29.3901, 103.8221),
+                new sogou.maps.LatLng(29.3896, 103.8228),
+                new sogou.maps.LatLng(29.3890, 103.8242),
+                new sogou.maps.LatLng(29.3890, 103.8247),
+                new sogou.maps.LatLng(29.3886, 103.8259),
+                new sogou.maps.LatLng(29.3885, 103.8276),
+                new sogou.maps.LatLng(29.3887, 103.8281),
+                new sogou.maps.LatLng(29.3892, 103.8289),
+                new sogou.maps.LatLng(29.3899, 103.8300),
+                new sogou.maps.LatLng(29.3901, 103.8306),
+                new sogou.maps.LatLng(29.3909, 103.8318),
+                new sogou.maps.LatLng(29.3949, 103.8341),
+                new sogou.maps.LatLng(29.3957, 103.8330),
+                new sogou.maps.LatLng(29.3972, 103.8321),
+                new sogou.maps.LatLng(29.3983, 103.8316),
+                new sogou.maps.LatLng(29.3993, 103.8324),
+                new sogou.maps.LatLng(29.3999, 103.8320),
+                new sogou.maps.LatLng(29.4004, 103.8314),
+                new sogou.maps.LatLng(29.4019, 103.8312),
+                new sogou.maps.LatLng(29.4030, 103.8304),
+                new sogou.maps.LatLng(29.4042, 103.8290),
+                new sogou.maps.LatLng(29.4058, 103.8297),
+                new sogou.maps.LatLng(29.4058, 103.8300),
+                new sogou.maps.LatLng(29.4061, 103.8300),
+                new sogou.maps.LatLng(29.4064, 103.8300),
+                new sogou.maps.LatLng(29.4067, 103.8300),
+                new sogou.maps.LatLng(29.4075, 103.8303),
+                new sogou.maps.LatLng(29.4078, 103.8306),
+                new sogou.maps.LatLng(29.4078, 103.8308),
+                new sogou.maps.LatLng(29.4075, 103.8314),
+                new sogou.maps.LatLng(29.4075, 103.8319),
+                new sogou.maps.LatLng(29.4075, 103.8328),
+                new sogou.maps.LatLng(29.4075, 103.8339),
+                new sogou.maps.LatLng(29.4075, 103.8336),
+                new sogou.maps.LatLng(29.4081, 103.8342),
+                new sogou.maps.LatLng(29.4083, 103.8350),
+                new sogou.maps.LatLng(29.4089, 103.8358),
+                new sogou.maps.LatLng(29.4089, 103.8361),
+                new sogou.maps.LatLng(29.4089, 103.8364),
+                new sogou.maps.LatLng(29.4086, 103.8372),
+                new sogou.maps.LatLng(29.4078, 103.8394),
+                new sogou.maps.LatLng(29.4075, 103.8397),
+                new sogou.maps.LatLng(29.4067, 103.8400),
+                new sogou.maps.LatLng(29.4067, 103.8403),
+                new sogou.maps.LatLng(29.4069, 103.8411),
+                new sogou.maps.LatLng(29.4069, 103.8414),
+                new sogou.maps.LatLng(29.4075, 103.8422),
+                new sogou.maps.LatLng(29.4075, 103.8425),
+                new sogou.maps.LatLng(29.4078, 103.8433),
+                new sogou.maps.LatLng(29.4078, 103.8441),
+                new sogou.maps.LatLng(29.4078, 103.8450),
+                new sogou.maps.LatLng(29.4083, 103.8458),
+                new sogou.maps.LatLng(29.4086, 103.8461),
+                new sogou.maps.LatLng(29.4093, 103.8474),
+                new sogou.maps.LatLng(29.4094, 103.8489),
+                new sogou.maps.LatLng(29.4099, 103.8500),
+                new sogou.maps.LatLng(29.4105, 103.8501),
+                new sogou.maps.LatLng(29.4110, 103.8508),
+                new sogou.maps.LatLng(29.4116, 103.8516),
+                new sogou.maps.LatLng(29.4129, 103.8527),
+                new sogou.maps.LatLng(29.4145, 103.8537),
+                new sogou.maps.LatLng(29.4157, 103.8534),
+                new sogou.maps.LatLng(29.4162, 103.8536),
+                new sogou.maps.LatLng(29.4173, 103.8541),
+                new sogou.maps.LatLng(29.4181, 103.8537),
+                new sogou.maps.LatLng(29.4193, 103.8538),
+                new sogou.maps.LatLng(29.4201, 103.8540),
+                new sogou.maps.LatLng(29.4205, 103.8541),
+                new sogou.maps.LatLng(29.4210, 103.8539),
+                new sogou.maps.LatLng(29.4216, 103.8539),
+                new sogou.maps.LatLng(29.4227, 103.8550),
+                new sogou.maps.LatLng(29.4230, 103.8557),
+                new sogou.maps.LatLng(29.4235, 103.8566),
+                new sogou.maps.LatLng(29.4238, 103.8570),
+                new sogou.maps.LatLng(29.4244, 103.8573),
+                new sogou.maps.LatLng(29.4252, 103.8582),
+                new sogou.maps.LatLng(29.4264, 103.8591),
+                new sogou.maps.LatLng(29.4271, 103.8595),
+                new sogou.maps.LatLng(29.4275, 103.8603),
+                new sogou.maps.LatLng(29.4278, 103.8605),
+                new sogou.maps.LatLng(29.4283, 103.8607),
+                new sogou.maps.LatLng(29.4292, 103.8613),
+                new sogou.maps.LatLng(29.4292, 103.8620),
+                new sogou.maps.LatLng(29.4292, 103.8625),
+                new sogou.maps.LatLng(29.4288, 103.8627),
+                new sogou.maps.LatLng(29.4286, 103.8628),
+                new sogou.maps.LatLng(29.4285, 103.8635),
+                new sogou.maps.LatLng(29.4286, 103.8638),
+                new sogou.maps.LatLng(29.4287, 103.8641),
+                new sogou.maps.LatLng(29.4289, 103.8643),
+                new sogou.maps.LatLng(29.4292, 103.8649),
+                new sogou.maps.LatLng(29.4297, 103.8652),
+                new sogou.maps.LatLng(29.4302, 103.8658),
+                new sogou.maps.LatLng(29.4307, 103.8664),
+                new sogou.maps.LatLng(29.4313, 103.8671),
+                new sogou.maps.LatLng(29.4314, 103.8677),
+                new sogou.maps.LatLng(29.4318, 103.8688),
+                new sogou.maps.LatLng(29.4321, 103.8696),
+                new sogou.maps.LatLng(29.4324, 103.8703),
+                new sogou.maps.LatLng(29.4326, 103.8707),
+                new sogou.maps.LatLng(29.4330, 103.8716),
+                new sogou.maps.LatLng(29.4335, 103.8718),
+                new sogou.maps.LatLng(29.4338, 103.8721),
+                new sogou.maps.LatLng(29.4350, 103.8732),
+                new sogou.maps.LatLng(29.4351, 103.8737),
+                new sogou.maps.LatLng(29.4354, 103.8741),
+                new sogou.maps.LatLng(29.4367, 103.8747),
+                new sogou.maps.LatLng(29.4375, 103.8757),
+                new sogou.maps.LatLng(29.4383, 103.8775),
+                new sogou.maps.LatLng(29.4393, 103.8791),
+                new sogou.maps.LatLng(29.4393, 103.8797),
+                new sogou.maps.LatLng(29.4390, 103.8808),
+                new sogou.maps.LatLng(29.4392, 103.8821),
+                new sogou.maps.LatLng(29.4384, 103.8839),
+                new sogou.maps.LatLng(29.4377, 103.8845),
+                new sogou.maps.LatLng(29.4372, 103.8849),
+                new sogou.maps.LatLng(29.4370, 103.8857),
+                new sogou.maps.LatLng(29.4370, 103.8865),
+                new sogou.maps.LatLng(29.4371, 103.8875),
+                new sogou.maps.LatLng(29.4369, 103.8879),
+                new sogou.maps.LatLng(29.4369, 103.8887),
+                new sogou.maps.LatLng(29.4379, 103.8901),
+                new sogou.maps.LatLng(29.4380, 103.8903),
+                new sogou.maps.LatLng(29.4384, 103.8907),
+                new sogou.maps.LatLng(29.4385, 103.8914),
+                new sogou.maps.LatLng(29.4392, 103.8920),
+                new sogou.maps.LatLng(29.4394, 103.8926),
+                new sogou.maps.LatLng(29.4396, 103.8935),
+                new sogou.maps.LatLng(29.4398, 103.8941),
+                new sogou.maps.LatLng(29.4398, 103.8947),
+                new sogou.maps.LatLng(29.4399, 103.8951),
+                new sogou.maps.LatLng(29.4398, 103.8965),
+                new sogou.maps.LatLng(29.4388, 103.8983),
+                new sogou.maps.LatLng(29.4384, 103.8988),
+                new sogou.maps.LatLng(29.4387, 103.8997),
+                new sogou.maps.LatLng(29.4389, 103.9011),
+                new sogou.maps.LatLng(29.4390, 103.9015),
+                new sogou.maps.LatLng(29.4397, 103.9022),
+                new sogou.maps.LatLng(29.4398, 103.9024),
+                new sogou.maps.LatLng(29.4392, 103.9032),
+                new sogou.maps.LatLng(29.4391, 103.9042),
+                new sogou.maps.LatLng(29.4392, 103.9073),
+                new sogou.maps.LatLng(29.4387, 103.9086),
+                new sogou.maps.LatLng(29.4385, 103.9100),
+                new sogou.maps.LatLng(29.4383, 103.9106),
+                new sogou.maps.LatLng(29.4380, 103.9113),
+                new sogou.maps.LatLng(29.4380, 103.9122),
+                new sogou.maps.LatLng(29.4380, 103.9132),
+                new sogou.maps.LatLng(29.4385, 103.9142),
+                new sogou.maps.LatLng(29.4387, 103.9147),
+                new sogou.maps.LatLng(29.4388, 103.9159),
+                new sogou.maps.LatLng(29.4389, 103.9163),
+                new sogou.maps.LatLng(29.4391, 103.9169),
+                new sogou.maps.LatLng(29.4395, 103.9181),
+                new sogou.maps.LatLng(29.4398, 103.9190),
+                new sogou.maps.LatLng(29.4404, 103.9206),
+                new sogou.maps.LatLng(29.4407, 103.9207),
+                new sogou.maps.LatLng(29.4424, 103.9214),
+                new sogou.maps.LatLng(29.4434, 103.9220),
+                new sogou.maps.LatLng(29.4448, 103.9231),
+                new sogou.maps.LatLng(29.4459, 103.9242),
+                new sogou.maps.LatLng(29.4464, 103.9251),
+                new sogou.maps.LatLng(29.4465, 103.9256),
+                new sogou.maps.LatLng(29.4464, 103.9269),
+                new sogou.maps.LatLng(29.4466, 103.9277),
+                new sogou.maps.LatLng(29.4466, 103.9281),
+                new sogou.maps.LatLng(29.4470, 103.9289),
+                new sogou.maps.LatLng(29.4474, 103.9298),
+                new sogou.maps.LatLng(29.4481, 103.9307),
+                new sogou.maps.LatLng(29.4485, 103.9314),
+                new sogou.maps.LatLng(29.4486, 103.9319),
+                new sogou.maps.LatLng(29.4488, 103.9330),
+                new sogou.maps.LatLng(29.4494, 103.9353),
+                new sogou.maps.LatLng(29.4496, 103.9357),
+                new sogou.maps.LatLng(29.4507, 103.9359),
+                new sogou.maps.LatLng(29.4514, 103.9364),
+                new sogou.maps.LatLng(29.4519, 103.9367),
+                new sogou.maps.LatLng(29.4531, 103.9374),
+                new sogou.maps.LatLng(29.4534, 103.9379),
+                new sogou.maps.LatLng(29.4544, 103.9385),
+                new sogou.maps.LatLng(29.4549, 103.9394),
+                new sogou.maps.LatLng(29.4554, 103.9395),
+                new sogou.maps.LatLng(29.4556, 103.9395),
+                new sogou.maps.LatLng(29.4561, 103.9400),
+                new sogou.maps.LatLng(29.4565, 103.9404),
+                new sogou.maps.LatLng(29.4570, 103.9412),
+                new sogou.maps.LatLng(29.4570, 103.9415),
+                new sogou.maps.LatLng(29.4569, 103.9417),
+                new sogou.maps.LatLng(29.4569, 103.9426),
+                new sogou.maps.LatLng(29.4569, 103.9430),
+                new sogou.maps.LatLng(29.4571, 103.9437),
+                new sogou.maps.LatLng(29.4571, 103.9445),
+                new sogou.maps.LatLng(29.4574, 103.9448),
+                new sogou.maps.LatLng(29.4576, 103.9454),
+                new sogou.maps.LatLng(29.4582, 103.9464),
+                new sogou.maps.LatLng(29.4587, 103.9468),
+                new sogou.maps.LatLng(29.4592, 103.9472),
+                new sogou.maps.LatLng(29.4597, 103.9475),
+                new sogou.maps.LatLng(29.4608, 103.9480),
+                new sogou.maps.LatLng(29.4613, 103.9482),
+                new sogou.maps.LatLng(29.4618, 103.9489),
+                new sogou.maps.LatLng(29.4619, 103.9490),
+                new sogou.maps.LatLng(29.4623, 103.9494),
+                new sogou.maps.LatLng(29.4625, 103.9497),
+                new sogou.maps.LatLng(29.4628, 103.9502),
+                new sogou.maps.LatLng(29.4639, 103.9516),
+                new sogou.maps.LatLng(29.4648, 103.9534),
+                new sogou.maps.LatLng(29.4647, 103.9549),
+                new sogou.maps.LatLng(29.4646, 103.9562),
+                new sogou.maps.LatLng(29.4652, 103.9583),
+                new sogou.maps.LatLng(29.4656, 103.9594),
+                new sogou.maps.LatLng(29.4656, 103.9612),
+                new sogou.maps.LatLng(29.4660, 103.9626),
+                new sogou.maps.LatLng(29.4664, 103.9635),
+                new sogou.maps.LatLng(29.4671, 103.9646),
+                new sogou.maps.LatLng(29.4685, 103.9665),
+                new sogou.maps.LatLng(29.4692, 103.9671),
+                new sogou.maps.LatLng(29.4703, 103.9675),
+                new sogou.maps.LatLng(29.4706, 103.9682),
+                new sogou.maps.LatLng(29.4716, 103.9692),
+                new sogou.maps.LatLng(29.4722, 103.9697),
+                new sogou.maps.LatLng(29.4727, 103.9703),
+                new sogou.maps.LatLng(29.4726, 103.9712),
+                new sogou.maps.LatLng(29.4727, 103.9718),
+                new sogou.maps.LatLng(29.4730, 103.9720),
+                new sogou.maps.LatLng(29.4730, 103.9730),
+                new sogou.maps.LatLng(29.4740, 103.9730),
+                new sogou.maps.LatLng(29.4750, 103.9730),
+                new sogou.maps.LatLng(29.4750, 103.9740),
+                new sogou.maps.LatLng(29.4760, 103.9750),
+                new sogou.maps.LatLng(29.4770, 103.9760),
+                new sogou.maps.LatLng(29.4770, 103.9770),
+                new sogou.maps.LatLng(29.4780, 103.9770),
+                new sogou.maps.LatLng(29.4790, 103.9770),
+                new sogou.maps.LatLng(29.4790, 103.9780),
+                new sogou.maps.LatLng(29.4790, 103.9790),
+                new sogou.maps.LatLng(29.4790, 103.9800),
+                new sogou.maps.LatLng(29.4790, 103.9810),
+                new sogou.maps.LatLng(29.4800, 103.9830),
+                new sogou.maps.LatLng(29.4800, 103.9850),
+                new sogou.maps.LatLng(29.4810, 103.9850),
+                new sogou.maps.LatLng(29.4820, 103.9860),
+                new sogou.maps.LatLng(29.4830, 103.9860),
+                new sogou.maps.LatLng(29.4830, 103.9860),
+                new sogou.maps.LatLng(29.4830, 103.9870),
+                new sogou.maps.LatLng(29.4830, 103.9870),
+                new sogou.maps.LatLng(29.4820, 103.9880),
+                new sogou.maps.LatLng(29.4820, 103.9890),
+                new sogou.maps.LatLng(29.4820, 103.9890),
+                new sogou.maps.LatLng(29.4830, 103.9900),
+                new sogou.maps.LatLng(29.4829, 103.9895),
+                new sogou.maps.LatLng(29.4831, 103.9898),
+                new sogou.maps.LatLng(29.4838, 103.9915),
+                new sogou.maps.LatLng(29.4848, 103.9925),
+                new sogou.maps.LatLng(29.4850, 103.9940),
+                new sogou.maps.LatLng(29.4851, 103.9951),
+                new sogou.maps.LatLng(29.4852, 103.9952),
+                new sogou.maps.LatLng(29.4855, 103.9953),
+                new sogou.maps.LatLng(29.4869, 103.9954),
+                new sogou.maps.LatLng(29.4883, 103.9967),
+                new sogou.maps.LatLng(29.4891, 103.9980),
+                new sogou.maps.LatLng(29.4895, 103.9983),
+                new sogou.maps.LatLng(29.4904, 103.9987),
+                new sogou.maps.LatLng(29.4912, 104.0003),
+                new sogou.maps.LatLng(29.4907, 104.0013),
+                new sogou.maps.LatLng(29.4910, 104.0020),
+                new sogou.maps.LatLng(29.4913, 104.0033),
+                new sogou.maps.LatLng(29.4918, 104.0046),
+                new sogou.maps.LatLng(29.4918, 104.0047),
+                new sogou.maps.LatLng(29.4918, 104.0047),
+                new sogou.maps.LatLng(29.4923, 104.0056),
+                new sogou.maps.LatLng(29.4931, 104.0062),
+                new sogou.maps.LatLng(29.4935, 104.0067),
+                new sogou.maps.LatLng(29.4939, 104.0069),
+                new sogou.maps.LatLng(29.4943, 104.0072),
+                new sogou.maps.LatLng(29.4953, 104.0083)
+            ];
+            var flightPath = new sogou.maps.Polyline({
+                path: flightPlanCoordinates,
+                strokeColor: "#FF0000",
+                strokeOpacity: 0.8,
+                strokeWeight: 2
+            });
+
+            var image = "../../Assets/Images/123.png";
+
+            //如果只指定一个，则自动认为悬停的图标跟前景显示的图标用同一个。
+            var marker = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.473, 103.972),
+                map: map,
+                icon: image,
+                title: "2#阀室"
+            });
+            attachSecretMessage(marker, "2");
+            var marker2 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4692, 103.9671),
+                map: map,
+                icon: image,
+                title: "3#阀室"
+            });
+            attachSecretMessage(marker2, "3");
+            var marker3 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4466, 103.9277),
+                map: map,
+                icon: image,
+                title: "4#阀室"
+            });
+            attachSecretMessage(marker3, "4");
+            var marker4 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4377, 103.8845),
+                map: map,
+                icon: image,
+                title: "5#阀室"
+            });
+            attachSecretMessage(marker4, "5");
+            var marker5 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4313, 103.8671),
+                map: map,
+                icon: image,
+                title: "6#阀室"
+            });
+            attachSecretMessage(marker5, "6");
+            var marker6 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4264, 103.8591),
+                map: map,
+                icon: image,
+                title: "7#阀室"
+            });
+            attachSecretMessage(marker6, "7");
+            var marker7 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4181, 103.8537),
+                map: map,
+                icon: image,
+                title: "8#阀室"
+            });
+            attachSecretMessage(marker7, "8");
+            var marker8 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4058, 103.83),
+                map: map,
+                icon: image,
+                title: "9#阀室"
+            });
+            attachSecretMessage(marker8, "9");
+            var marker9 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.3892, 103.8201),
+                map: map,
+                icon: image,
+                title: "10#阀室"
+            });
+            attachSecretMessage(marker9, "10");
+            var marker10 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4953, 104.0083),
+                map: map,
+                icon: '../../Assets/Images//0.png',
+                title:"输卤车间"
+            });
+            attachSecretMessage(marker10, "输卤车间");
+            var marker11 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4912, 104.00029),
+                map: map,
+                icon: '../../Assets/Images//1.png'
+            });
+
+            var marker12 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4849, 103.9939),
+                map: map,
+                icon: '../../Assets/Images//2.png'
+            });
+
+            var marker13 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4820, 103.9854),
+                map: map,
+                icon: '../../Assets/Images/3.png'
+            });
+
+            var marker14 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4785, 103.9770),
+                map: map,
+                icon: '../../Assets/Images/4.png'
+            });
+
+            var marker15 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4726, 103.9702),
+                map: map,
+                icon: '../../Assets/Images/5.png'
+            });
+            var marker16 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4663, 103.9635),
+                map: map,
+                icon: '../../Assets/Images/6.png'
+            });
+            var marker17 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4648, 103.9533),
+                map: map,
+                icon: '../../Assets/Images/7.png'
+            });
+            var marker18 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4582, 103.9463),
+                map: map,
+                icon: '../../Assets/Images/8.png'
+            });
+            var marker19 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4544, 103.9384),
+                map: map,
+                icon: '../../Assets/Images/9.png'
+            });
+            var marker20 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.44859, 103.9318),
+                map: map,
+                icon: '../../Assets/Images/10.png'
+            });
+            var marker21 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4447, 103.9230),
+                map: map,
+                icon: '../../Assets/Images/11.png'
+            });
+            var marker22 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4389, 103.9162),
+                map: map,
+                icon: '../../Assets/Images/12.png'
+            });
+            var marker23 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4392, 103.9073),
+                map: map,
+                icon: '../../Assets/Images/13.png'
+            });
+            var marker24 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4403, 103.8981),
+                map: map,
+                icon: '../../Assets/Images/14.png'
+            });
+            var marker25 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4369, 103.8886),
+                map: map,
+                icon: '../../Assets/Images/15.png'
+            });
+            var marker26 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.43930, 103.8791),
+                map: map,
+                icon: '../../Assets/Images/16.png'
+            });
+            var marker27 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4334, 103.8717),
+                map: map,
+                icon: '../../Assets/Images/17.png'
+            });
+            var marker28 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4285, 103.8635),
+                map: map,
+                icon: '../../Assets/Images/18.png',
+            });
+            var marker29 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4238, 103.857),
+                map: map,
+                icon: '../../Assets/Images/19.png'
+            });
+            var marker30 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4161, 103.8536),
+                map: map,
+                icon: '../../Assets/Images/20.png'
+            });
+            var marker31 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4094, 103.8489),
+                map: map,
+                icon: '../../Assets/Images/21.png'
+            });
+            var marker32 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4075, 103.8396),
+                map: map,
+                icon: '../../Assets/Images/22.png'
+            });
+            var marker33 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4075, 103.8314),
+                map: map,
+                icon: '../../Assets/Images/23.png'
+            });
+            var marker34 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.4008, 103.8313),
+                map: map,
+                icon: '../../Assets/Images/24.png'
+            });
+            var marker35 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.3933, 103.8331),
+                map: map,
+                icon: '../../Assets/Images/25.png'
+            });
+            var marker36 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.3879, 103.8255),
+                map: map,
+                icon: '../../Assets/Images/26.png'
+            });
+            var marker37 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.3863, 103.8184),
+                map: map,
+                icon: '../../Assets/Images/27.png'
+            });
+            var marker38 = new sogou.maps.Marker({
+                position: new sogou.maps.LatLng(29.3800, 103.8162),
+                map: map,
+                icon: '../../Assets/Images/28.png',
+                title:"五通厂区"
+            });
+            attachSecretMessage(marker38, "五通厂区");
+            flightPath.setMap(map);
+        }
+
+        // 点击5个标记可以看到一条信息
+        function attachSecretMessage(marker, loggerName) {
+            var infowindow = new sogou.maps.InfoWindow(
+                {
+                    content: ""
+                });
+            sogou.maps.event.addListener(marker, 'click', function () {
+                var message = "<table style='width:150px'><tr><td style='width:50px'>压力:</td><td>";
+                message += "<span id='pressspan' class='pressspan' style='width:100px'></span>Mpa</td></tr></table>";
+                var interval = setInterval(function () {
+                    $.getJSON('/Map/GetData?' + Math.random(), { data: loggerName }, function (data) {
+                        if (loggername === "输卤车间") {
+                            $('.pressspan').html(data[0]);
+                        }
+                        else if (loggerName === "五通厂区") {
+                            $('.pressspan').html(data[0]);
+                        }
+                        else {
+                            $('.pressspan').html(data[0]);
+                        }
+                    });
+                }, 1000);
+                infowindow.setContent(message);
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+</head>
+<body onload="initialize()">
+    <div id="map_canvas"></div>
+</body>
+</html>

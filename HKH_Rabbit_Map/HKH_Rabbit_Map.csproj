@@ -45,7 +45,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.OPCAutomation">
+      <HintPath>..\libs\Interop.OPCAutomation.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -99,9 +109,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -147,13 +154,56 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="utility\LogHelper.cs" />
+    <Compile Include="utility\OpcHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\0.png" />
+    <Content Include="Assets\Images\1.png" />
+    <Content Include="Assets\Images\10.png" />
+    <Content Include="Assets\Images\11.png" />
+    <Content Include="Assets\Images\12.png" />
+    <Content Include="Assets\Images\123.png" />
+    <Content Include="Assets\Images\13.png" />
+    <Content Include="Assets\Images\14.png" />
+    <Content Include="Assets\Images\15.png" />
+    <Content Include="Assets\Images\16.png" />
+    <Content Include="Assets\Images\17.png" />
+    <Content Include="Assets\Images\18.png" />
+    <Content Include="Assets\Images\19.png" />
+    <Content Include="Assets\Images\2.png" />
+    <Content Include="Assets\Images\20.png" />
+    <Content Include="Assets\Images\21.png" />
+    <Content Include="Assets\Images\22.png" />
+    <Content Include="Assets\Images\23.png" />
+    <Content Include="Assets\Images\24.png" />
+    <Content Include="Assets\Images\25.png" />
+    <Content Include="Assets\Images\26.png" />
+    <Content Include="Assets\Images\27.png" />
+    <Content Include="Assets\Images\28.png" />
+    <Content Include="Assets\Images\29.png" />
+    <Content Include="Assets\Images\3.png" />
+    <Content Include="Assets\Images\30.png" />
+    <Content Include="Assets\Images\31.png" />
+    <Content Include="Assets\Images\32.png" />
+    <Content Include="Assets\Images\33.png" />
+    <Content Include="Assets\Images\34.png" />
+    <Content Include="Assets\Images\35.png" />
+    <Content Include="Assets\Images\36.png" />
+    <Content Include="Assets\Images\37.png" />
+    <Content Include="Assets\Images\4.png" />
+    <Content Include="Assets\Images\5.png" />
+    <Content Include="Assets\Images\6.png" />
+    <Content Include="Assets\Images\7.png" />
+    <Content Include="Assets\Images\8.png" />
+    <Content Include="Assets\Images\9.png" />
+    <Content Include="Assets\Images\bg-1.png" />
+    <Content Include="Assets\Images\bg.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -186,12 +236,8 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Map\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
