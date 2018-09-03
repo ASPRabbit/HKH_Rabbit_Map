@@ -76,9 +76,7 @@ namespace HKH_Rabbit_Map.utility
                 }
                 catch (Exception ex)
                 {
-                    //throw;
-                    LogHelper.WriteLog(typeof(OpcClient), ex.Message);
-                    //return null;
+                    LogHelper.WriteLog(typeof(OpcClient), ex.StackTrace +ex.Message);
                 }
             }
 
@@ -104,7 +102,7 @@ namespace HKH_Rabbit_Map.utility
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.WriteLog(typeof(OpcClient), ex.Message);
+                    LogHelper.WriteLog(typeof(OpcClient), ex.StackTrace + ex.Message);
                 }
             }
 
@@ -129,7 +127,7 @@ namespace HKH_Rabbit_Map.utility
                     }
                     catch (Exception ex)
                     {
-                        LogHelper.WriteLog(typeof(OpcClient), ex.Message);
+                        LogHelper.WriteLog(typeof(OpcClient), ex.StackTrace + ex.Message);
                     }
                 }
             }
@@ -148,7 +146,7 @@ namespace HKH_Rabbit_Map.utility
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.WriteLog(typeof(OpcClient), ex.Message);
+                    LogHelper.WriteLog(typeof(OpcClient), ex.StackTrace + ex.Message);
                 }
             }
 
@@ -169,7 +167,7 @@ namespace HKH_Rabbit_Map.utility
                     }
                     catch (Exception ex)
                     {
-                        LogHelper.WriteLog(typeof(OpcClient), ex.Message);
+                        LogHelper.WriteLog(typeof(OpcClient), ex.StackTrace + ex.Message);
                     }
                     //Thread.Sleep(100);//暂停100毫秒
                 }
@@ -303,9 +301,5 @@ namespace HKH_Rabbit_Map.utility
 
             public string[] Point { get; set; }
         }
-
     }
-
-
-
 }
